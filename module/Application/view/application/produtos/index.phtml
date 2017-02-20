@@ -1,0 +1,57 @@
+    <?php if(count($messages)):?>
+        <?php foreach($messages as $value):
+        $key = key($value);
+        $message = current($value);
+        ?>
+            <div class="alert alert-<? echo $key?>">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <?php echo $message;?>
+            </div>
+        <?php endforeach;?>
+    <?php endif;?>
+    
+    <h1><?php echo $titulo?></h1>
+    <div class="form-group">
+    	<a class="btn btn-primary" href="/projetozend/public/Produtos/cadastrar"><i class="icon-plus icon-white"></i> Cadastrar</a>
+    </div>
+    <div class="">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Foto</th>
+                    <th>Nome</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php 
+            if(count($produtos)):
+                foreach ($produtos as $produto):?>
+                <tr>
+                    <td><?php echo $produto->produto_id?></td>
+                    <td><img src="../conteudos/produtos/<?php echo $produto->produto_foto?>" width="100px"/></td>
+                    <td><?php echo $produto->produto_nome?></td>
+                    <td>
+                        <div class="btn-group">
+							<a class="btn btn-primary" href="#"><i class="icon-th-list icon-white"></i> Ações</a>
+							<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="/projetozend/public/Produtos/editar/<?php echo $produto->produto_id?>" title="Editar"><i class="icon-pencil"></i> Editar</a>  </li>
+								<li><a href="/projetozend/public/Produtos/remove/<?php echo $produto->produto_id?>" title="Excluir"><i class="icon-trash"></i> Excluir</a></li>
+								
+							</ul>
+					    </div>
+                    </td>
+                </tr>
+            <?php
+                endforeach;
+            else:?>
+            <tr>
+                <td colspan="4">Nenhum produto cadastrado</td>
+            </tr>   
+            <?php endif;?> 
+            </tbody>
+        </table>
+        <?php echo $this->paginationcontrol($produtos, 'Sliding', '/partials/paginator/control.phtml')?>
+    </div>

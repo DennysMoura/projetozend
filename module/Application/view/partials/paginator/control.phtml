@@ -1,0 +1,17 @@
+<div class="pagination pagination-centered">
+    <?php if(isset($this->previous)):?>
+        <a class="btn" href="?pagina=<?php echo $this->previous?>">Anterior</a>
+    <?php endif;?>
+    
+    <?php foreach ($this->pagesInRange as $item):?>
+        <?php if($this->current == $item):?>
+            <a class="btn disabled" href="javascript:void(0)"><?php echo $item?></a>
+        <?php else:?>
+            <a class="btn disabled" href="?pagina=<?php echo $item?>"><?php echo $item?></a>
+        <?php endif;?>
+    <?php endforeach;?>
+    
+    <?php if(isset($this->next)):?>
+        <a class="btn" href="?pagina=<?php echo $this->next?>">Próximo</a>
+    <?php endif;?>
+</div>
